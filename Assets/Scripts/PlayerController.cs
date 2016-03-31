@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetKeyDown ("space")) {
 			GetComponent<Rigidbody2D> ().velocity = new Vector2 (5, 5);
 		} else {
-			GetComponent<Rigidbody2D>().velocity = new Vector2 (5, 0);
+			GetComponent<Rigidbody2D>().velocity = new Vector2 (15, 0);
 		}
 	}
 }

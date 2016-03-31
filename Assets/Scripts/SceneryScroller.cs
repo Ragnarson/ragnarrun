@@ -6,20 +6,13 @@ public class SceneryScroller : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D otherElement){
 		print (otherElement.tag);
 
-		if (otherElement.tag == "Ground") {
+		if (otherElement.tag == "Ground" || otherElement.tag == "Sky") {
 			Vector2 position = otherElement.transform.position;
 
-			position.x += 2*31.0f;
+			position.x += 2*48.0f;
 
 			otherElement.transform.position = position;
 		}
 
-		if (otherElement.tag == "Sky") {
-			Vector2 position = otherElement.transform.position;
-
-			position.x += 2*61.0f;
-
-			otherElement.transform.position = position;
-		}
 	}
 }
