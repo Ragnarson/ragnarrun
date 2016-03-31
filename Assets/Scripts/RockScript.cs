@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GemScript : MonoBehaviour {
+public class RockScript : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D otherElement)
 	{
