@@ -4,18 +4,18 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
 	public int life;
+	public Rigidbody2D rb;
 
 	// Use this for initialization
 	void Start () {
-
+		rb = GetComponent<Rigidbody2D>();
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown ("space")) {
-			GetComponent<Rigidbody2D> ().velocity = new Vector2 (5, 5);
-		} else {
-			GetComponent<Rigidbody2D>().velocity = new Vector2 (15, 0);
+	void FixedUpdate () {
+		if (Input.GetKey ("space")) {
+			rb.AddForce (Vector2.up * 100);
 		}
+		rb.velocity = new Vector2 (10, rb.velocity.y);
 	}
 }
