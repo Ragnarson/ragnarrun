@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void Hit() {
-		life--;
+		life -= 20;
 		lifeText.text = "Life: " + life;
 	}
 
