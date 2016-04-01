@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	void Update() {
-		if life == 0 {
+		if (life <= 0) {
 			GameController.current.GameOver();
 		}
 	}
@@ -40,6 +40,6 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void GameOver() {
-		
+		//logic for gameover state
 	}
 }
