@@ -5,10 +5,12 @@ public class GameController : MonoBehaviour {
 
 	public GUIText scoreText;
 	public GUIText lifeText;
+	public GameObject gameOvertext;
+	public GameObject ragnar;
+
 
 	public static GameController current;
 	public int life = 100;
-
 	public int score = 0;
 
 	void Awake()
@@ -35,11 +37,14 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void Hit() {
-		life -= 20;
+		if (life > 0)
+			life -= 20;
 		lifeText.text = "Life: " + life;
 	}
 
 	public void GameOver() {
 		//logic for gameover state
+		gameOvertext.SetActive (true);
+		ragnar.GetComponent<PlayerController> ().SetRun (false);
 	}
 }

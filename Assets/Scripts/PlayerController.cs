@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour {
 
 	public int life;
 	public Rigidbody2D rb;
+	public bool run = true;
 
 	// Use this for initialization
 	void Start () {
@@ -13,9 +14,15 @@ public class PlayerController : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
-		if (Input.GetKey ("space")) {
-			rb.AddForce (Vector2.up * 100);
+		if (run) {
+			if (Input.GetKey ("space")) {
+				rb.AddForce (Vector2.up * 100);
+			}
+			rb.velocity = new Vector2 (10, rb.velocity.y);
 		}
-		rb.velocity = new Vector2 (10, rb.velocity.y);
+	}
+
+	public void SetRun(bool state){
+		run = state;
 	}
 }
