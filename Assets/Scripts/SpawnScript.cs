@@ -6,7 +6,8 @@ public class SpawnScript : MonoBehaviour {
 	public GameObject rockPrefab;		//the column game 
 	public int rockPoolSize = 5;		//how many objects to keep on standby
 	public float spawnRate = 3f;		//how quickly objects spawn
-
+	public float scaleMax = 0.5f;
+	public float scaleMin = 1.0f;
 	GameObject[] objects;				//collection of pooled objects
 	int currentObject = 0;				//index of the current column in the collection
 
@@ -39,11 +40,28 @@ public class SpawnScript : MonoBehaviour {
 		//infinite loop: use with caution
 		while (true) 
 		{	
-			//To spawn a column, get the current spawner position...
+			//To spawn new object, get the current spawner position...
 			Vector3 pos = transform.position;
-
+			GameObject rockObject = objects[currentObject];
 			// set that for new object
-			objects[currentObject].transform.position = pos;
+//			float newSizeY, oldSizeY;
+
+//			oldSizeY = rockObject.GetComponent<Renderer> ().bounds.size.y;
+
+
+//			rockObject.transform.localScale += new Vector3 (
+//				Random.Range(scaleMin, scaleMax),
+//				Random.Range(scaleMin, scaleMax),
+//				0);
+
+
+//			newSizeY = rockObject.GetComponent<Renderer> ().bounds.size.y;
+			// print ("what " + currentObject + " p " + pos.y + " new " + newSizeY + " old " + oldSizeY);
+
+			// pos.y += newSizeY - oldSizeY;
+
+			// assign new position - from spawner object + our transitions above
+			rockObject.transform.position = pos;
 
 			//increase the value of currentObject. If the new size is too big, set it back to zero
 			if(++currentObject >= rockPoolSize)
