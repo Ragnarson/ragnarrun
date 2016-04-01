@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour {
 	public static GameController current;
 	public int life = 100;
 
-	int score = 0;
+	public int score = 0;
 
 	void Awake()
 	{
