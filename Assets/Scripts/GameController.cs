@@ -46,5 +46,6 @@ public class GameController : MonoBehaviour {
 		//logic for gameover state
 		gameOvertext.SetActive (true);
 		ragnar.GetComponent<PlayerController> ().SetRun (false);
+		Destroy(ragnar.GetComponent<Animator>());
 	}
 }
