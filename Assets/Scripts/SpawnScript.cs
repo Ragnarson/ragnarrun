@@ -3,26 +3,29 @@ using System.Collections;
 
 public class SpawnScript : MonoBehaviour {
 
-	public GameObject rockPrefab;		//the column game 
-	public int rockPoolSize = 5;		//how many objects to keep on standby
+	public GameObject rockPrefab;		//the rock prefab
+	public GameObject gemPrefab;		//the gem prefab
+	public int poolSize = 5;		//how many objects to keep on standby
 	public float spawnRate = 3f;		//how quickly objects spawn
 	public float scaleMax = 0.5f;
 	public float scaleMin = 1.0f;
-	GameObject[] objects;				//collection of pooled objects
+	GameObject[] rockObjects;				//collection of pooled objects
+	GameObject[] gemObjects;	
 	int currentObject = 0;				//index of the current column in the collection
-
 
 	void Start()
 	{
 		//initialize the objects collection
-		objects = new GameObject[rockPoolSize];
+		rockObjects = new GameObject[poolSize];
+		gemObjects = new GameObject[poolSize];
 		//loop through the collection and create the individual objects
-		for(int i = 0; i < rockPoolSize; i++)
+		for(int i = 0; i < poolSize; i++)
 		{
 			//note that objects will have the exact position and rotation of the prefab asset.
 			//this is because we did not specify the position and rotation in the 
 			//Instantiate() method call
-			objects[i] = (GameObject)Instantiate(rockPrefab);
+			rockObjects[i] = (GameObject)Instantiate(rockPrefab);
+			gemObjects[i] = (GameObject)Instantiate(gemPrefab);
 		}
 		//starts our function in charge of spawning the objects in the playable area
 		StartCoroutine ("SpawnLoop");
@@ -41,30 +44,18 @@ public class SpawnScript : MonoBehaviour {
 		while (true) 
 		{	
 			//To spawn new object, get the current spawner position...
-			Vector3 pos = transform.position;
-			GameObject rockObject = objects[currentObject];
-			// set that for new object
-//			float newSizeY, oldSizeY;
+			Vector3 rockPos = transform.position;
+			GameObject rockObject = rockObjects[currentObject];
+			rockObject.transform.position = rockPos;
 
-//			oldSizeY = rockObject.GetComponent<Renderer> ().bounds.size.y;
-
-
-//			rockObject.transform.localScale += new Vector3 (
-//				Random.Range(scaleMin, scaleMax),
-//				Random.Range(scaleMin, scaleMax),
-//				0);
-
-
-//			newSizeY = rockObject.GetComponent<Renderer> ().bounds.size.y;
-			// print ("what " + currentObject + " p " + pos.y + " new " + newSizeY + " old " + oldSizeY);
-
-			// pos.y += newSizeY - oldSizeY;
-
-			// assign new position - from spawner object + our transitions above
-			rockObject.transform.position = pos;
+			Vector3 gemPos = transform.position;
+			GameObject gemObject = gemObjects[currentObject];
+			gemPos.x -= Random.Range(-4f, 4f);
+			gemPos.y += 5.0f;
+			gemObject.transform.position = gemPos;
 
 			//increase the value of currentObject. If the new size is too big, set it back to zero
-			if(++currentObject >= rockPoolSize)
+			if(++currentObject >= poolSize)
 				currentObject = 0;
 			//leave this coroutine until the proper amount of time has passed
 			yield return new WaitForSeconds(Random.Range(spawnRate-2f, spawnRate+4f));
